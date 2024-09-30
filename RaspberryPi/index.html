@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modbus Data Reader</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Đọc dữ liệu từ đồng hồ</h1>
+    
+    <form id="dataForm">
+        <label for="device">Chọn loại đồng hồ:</label>
+        <select id="device" name="device">
+            <option value="PM1200">PM1200</option>
+            <option value="MFM384-C">MFM384-C</option>
+        </select><br><br>
+
+        <label for="select_all">Chọn tất cả thông tin:</label>
+        <input type="checkbox" id="select_all"><br><br>
+
+        <label>Chọn loại thông tin:</label><br>
+        <input type="checkbox" class="data_type" name="data_types" value="A1"> A1 (Current, phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="A2"> A2 (Current, phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="A3"> A3 (Current, phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="VLL"> VLL (Line to line average)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="VLN"> VLN (Line to neutral voltage)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V12"> V12 (Voltage phase 1 to phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V23"> V23 (Voltage phase 2 to phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V31"> V31 (Voltage phase 3 to phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF1"> PF1 (Power factor, phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF2"> PF2 (Power factor, phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF3"> PF3 (Power factor, phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="Frequency"> Frequency (Hz)<br><br>
+
+        <div id="addressInputs"></div>
+
+        <label for="update_interval">Thời gian cập nhật (giây):</label>
+        <input type="number" id="update_interval" name="update_interval" value="10" required><br><br>
+
+        <button type="submit">Read Data</button>
+    </form>
+
+    <h2>Kết quả:</h2>
+    <table id="resultTable" border="1">
+        <thead>
+            <tr>
+                <th>Loại thông tin</th>
+                <th>Giá trị</th>
+                <th>Đơn vị</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Tự động tích chọn tất cả thông tin
+        $('#select_all').change(function() {
+            $('.data_type').prop('checked', $(this).prop('checked'));
+            updateAddressInputs();
+        });
+
+        // Cập nhật phần nhập địa chỉ khi tích chọn thông tin
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modbus Data Reader</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Đọc dữ liệu từ đồng hồ</h1>
+    
+    <form id="dataForm">
+        <label for="device">Chọn loại đồng hồ:</label>
+        <select id="device" name="device">
+            <option value="PM1200">PM1200</option>
+            <option value="MFM384-C">MFM384-C</option>
+        </select><br><br>
+
+        <label for="select_all">Chọn tất cả thông tin:</label>
+        <input type="checkbox" id="select_all"><br><br>
+
+        <label>Chọn loại thông tin:</label><br>
+        <input type="checkbox" class="data_type" name="data_types" value="A1"> A1 (Current, phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="A2"> A2 (Current, phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="A3"> A3 (Current, phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="VLL"> VLL (Line to line average)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="VLN"> VLN (Line to neutral voltage)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V12"> V12 (Voltage phase 1 to phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V23"> V23 (Voltage phase 2 to phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V31"> V31 (Voltage phase 3 to phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF1"> PF1 (Power factor, phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF2"> PF2 (Power factor, phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF3"> PF3 (Power factor, phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="Frequency"> Frequency (Hz)<br><br>
+
+        <div id="addressInputs"></div>
+
+        <label for="update_interval">Thời gian cập nhật (giây):</label>
+        <input type="number" id="update_interval" name="update_interval" value="10" required><br><br>
+
+        <button type="submit">Read Data</button>
+    </form>
+
+    <h2>Kết quả:</h2>
+    <table id="resultTable" border="1">
+        <thead>
+            <tr>
+                <th>Loại thông tin</th>
+                <th>Giá trị</th>
+                <th>Đơn vị</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Tự động tích chọn tất cả thông tin
+        $('#select_all').change(function() {
+            $('.data_type').prop('checked', $(this).prop('checked'));
+            updateAddressInputs();
+        });
+
+        // Cập nhật phần nhập địa chỉ khi tích chọn thông tin
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modbus Data Reader</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Đọc dữ liệu từ đồng hồ</h1>
+    
+    <form id="dataForm">
+        <label for="device">Chọn loại đồng hồ:</label>
+        <select id="device" name="device">
+            <option value="PM1200">PM1200</option>
+            <option value="MFM384-C">MFM384-C</option>
+        </select><br><br>
+
+        <label for="select_all">Chọn tất cả thông tin:</label>
+        <input type="checkbox" id="select_all"><br><br>
+
+        <label>Chọn loại thông tin:</label><br>
+        <input type="checkbox" class="data_type" name="data_types" value="A1"> A1 (Current, phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="A2"> A2 (Current, phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="A3"> A3 (Current, phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="VLL"> VLL (Line to line average)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="VLN"> VLN (Line to neutral voltage)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V12"> V12 (Voltage phase 1 to phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V23"> V23 (Voltage phase 2 to phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="V31"> V31 (Voltage phase 3 to phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF1"> PF1 (Power factor, phase 1)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF2"> PF2 (Power factor, phase 2)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="PF3"> PF3 (Power factor, phase 3)<br>
+        <input type="checkbox" class="data_type" name="data_types" value="Frequency"> Frequency (Hz)<br><br>
+
+        <div id="addressInputs"></div>
+
+        <label for="update_interval">Thời gian cập nhật (giây):</label>
+        <input type="number" id="update_interval" name="update_interval" value="10" required><br><br>
+
+        <button type="submit">Read Data</button>
+    </form>
+
+    <h2>Kết quả:</h2>
+    <table id="resultTable" border="1">
+        <thead>
+            <tr>
+                <th>Loại thông tin</th>
+                <th>Giá trị</th>
+                <th>Đơn vị</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Tự động tích chọn tất cả thông tin
+        $('#select_all').change(function() {
+            $('.data_type').prop('checked', $(this).prop('checked'));
+            updateAddressInputs();
+        });
+
+        // Cập nhật phần nhập địa chỉ khi tích chọn thông tin
+		$('.data_type').change(function() {
+            updateAddressInputs();
+        });
+
+        function updateAddressInputs() {
+            const selectedTypes = $('.data_type:checked');
+            let html = '';
+            selectedTypes.each(function() {
+                const type = $(this).val();
+                html += `<label for="address_${type}">Địa chỉ cho ${type}:</label>
+                         <input type="number" id="address_${type}" name="${type}" required><br><br>`;
+            });
+            $('#addressInputs').html(html);
+        }
+
+        function fetchData() {
+            $.ajax({
+                url: '/read-data',
+                method: 'POST',
+                data: $('#dataForm').serialize(),
+                success: function(response) {
+                    const tableBody = $('#resultTable tbody');
+                    tableBody.empty();
+                    response.data_results.forEach(item => {
+                        tableBody.append(
+                            `<tr>
+                                <td>${item.type}</td>
+                                <td>${item.value}</td>
+                                <td>${item.unit}</td>
+                            </tr>`
+                        );
+                    });
+
+                    // Set interval for automatic update
+                    setTimeout(fetchData, response.update_interval * 1000);
+                },
+                error: function() {
+                    alert('Lỗi khi lấy dữ liệu');
+                }
+            });
+        }
+
+        $('#dataForm').on('submit', function(e) {
+            e.preventDefault();
+            fetchData();
+        });
+    </script>
+</body>
+</html>
